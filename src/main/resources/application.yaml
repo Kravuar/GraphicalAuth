@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: users
+  data:
+    mongodb:
+      database: users
+      authentication-database: admin
+      username: root
+      password: test
+      port: 27017
+      host: localhost
+      auto-index-creation: true
