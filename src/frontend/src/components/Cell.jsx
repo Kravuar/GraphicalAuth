@@ -8,6 +8,6 @@ export default function Cell({onToggle, isToggled}) {
         setState(!state)
     }
 
-    return <div className={`cell ${isToggled ? 'toggled' : ''}`}
-                onClick={toggle}/>
+    return <div className={`cell ${state ? 'toggled' : ''}`}
+                onMouseDownCapture={toggle}/>
 }

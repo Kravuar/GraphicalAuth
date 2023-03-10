@@ -1,0 +1,32 @@
+:root {
+    --grid_size: 10;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid_size), minmax(50px, 1fr));
+    grid-template-rows: repeat(var(--grid_size), minmax(50px, 1fr));
+    grid-gap: 1px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: lightgray;
+    transition: all 0.3s ease-in-out;
+}
+
+.cell:after {
+    padding-bottom: 100%;
+}
+.cell:hover {
+    background-color: gray;
+}
+.cell.toggled {
+    background-color: blue;
+}

@@ -1,6 +1,6 @@
 import {useRef} from "react";
-import Form from "../components/Form";
-import Grid from "../components/Grid";
+import Form from "./components/Form";
+import Grid from "./components/Grid";
 
 export default function App() {
   const grid = useRef(null);

@@ -19,7 +19,7 @@ function Grid({size, ref}) {
     for(let i = 0; i < size; ++i)
         for(let j = 0; j < size; ++j)
             grid.push(<Cell onToggle={() => handleToggle(i * size + j)}/>)
-
+    
     return <div className="grid">{grid}</div>;
 }
 
