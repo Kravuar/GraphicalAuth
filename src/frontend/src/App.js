@@ -11,7 +11,7 @@ export default function App() {
   }
 
   return (
-    <div className="container">
+    <div className="container my-5 py-3 px-3 shadow">
       <Form onSubmit={submit}/>
       <Grid size={process.env.REACT_APP_GRID_SIZE} ref={grid}/>
     </div>

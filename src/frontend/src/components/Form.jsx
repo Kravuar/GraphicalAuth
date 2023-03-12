@@ -4,10 +4,11 @@ export default function Form({onSubmit}) {
     const username = useRef(null);
 
     return(
-        <div className="form row">
-            <label htmlFor="uname">Enter your username: </label>
-            <input type="text" placeholder="Username..." name="username" id="uname" ref={username}/>
-            <button className="btn btn-outline-success" onClick={() => onSubmit(username)}>Login</button>
+        <div className="container centered">
+            <div className="row my-2">
+                <input className="form-control my-1" type="text" placeholder="Username..." name="username" ref={username}/>
+                <button className="btn btn-outline-success my-1" onClick={() => onSubmit(username)}>Login</button>
+            </div>
         </div>
     );
 }
