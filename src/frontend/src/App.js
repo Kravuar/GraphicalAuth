@@ -7,7 +7,7 @@ export default function App() {
 
   const submit = (username) => {
       console.log(username);
-      console.log(grid.current.getToggled());
+      console.log(grid.current.getToggled().sort((a, b) => a - b));
   }
 
   return (

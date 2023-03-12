@@ -1,5 +1,8 @@
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: 60s
 
 spring:
   application:
@@ -13,3 +16,12 @@ spring:
       port: 27017
       host: localhost
       auto-index-creation: true
+
+app:
+  i18n:
+    supportedLocales:
+      - EN
+      - RU
+    defaultLocale: RU
+  web:
+    login-attempts: 3

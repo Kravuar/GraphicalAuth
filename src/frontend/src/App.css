@@ -33,7 +33,7 @@ input, input::placeholder{
 .cell:after {
     padding-bottom: 100%;
 }
-.cell:hover {
+.cell:hover, .cell.toggled:hover {
     background-color: var(--contrasted);
 }
 .cell.toggled {

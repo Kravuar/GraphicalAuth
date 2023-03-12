@@ -1,13 +1,17 @@
 import {useState} from "react";
 
-export default function Cell({onToggle, isToggled}) {
-    const [state, setState] = useState(isToggled);
+export default function Cell({onToggle}) {
+    const [state, setState] = useState(false);
 
     const toggle = () => {
         onToggle();
-        setState(!state)
+        setState(!state);
     }
 
-    return <div className={`cell ${state ? 'toggled' : ''}`}
-                onMouseDownCapture={toggle}/>
+    const onHover = (event) => {
+        if (event.buttons === 1)
+            toggle()
+    }
+
+    return <div className={`cell ${state ? 'toggled' : ''}`} onMouseEnter={onHover} onMouseDown={toggle}/>
 }

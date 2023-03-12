@@ -1,7 +1,7 @@
 import Cell from "./Cell";
 import {forwardRef, useImperativeHandle} from "react";
 
-function Grid({size, ref}) {
+function Grid({size}, ref) {
     const toggled = []
 
     useImperativeHandle(ref, () => ({
@@ -18,7 +18,7 @@ function Grid({size, ref}) {
     const grid = [];
     for(let i = 0; i < size; ++i)
         for(let j = 0; j < size; ++j)
-            grid.push(<Cell onToggle={() => handleToggle(i * size + j)}/>)
+            grid.push(<Cell key={i * size + j} onToggle={() => handleToggle(i * size + j)}/>)
 
     const style = {
         gridTemplateColumns: `repeat(${size}, minmax(50px, 2vw))`,

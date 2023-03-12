@@ -17,9 +17,9 @@ public class User {
     @Id
     private ObjectId id;
     @Indexed(unique = true)
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, message = "validation.username")
     private String username;
-    @NotBlank
+    @NotBlank(message = "validation.keyHash")
     private Binary keyHash;
 
     public User(String username, Binary keyHash) {

@@ -4,8 +4,9 @@ import com.mongodb.DuplicateKeyException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
-import net.kravuar.graphicalkey.domain.model.InvalidCredentialsException;
-import net.kravuar.graphicalkey.domain.model.UserNotFoundException;
+import net.kravuar.graphicalkey.domain.dto.LoginFailureDTO;
+import net.kravuar.graphicalkey.domain.model.service.InvalidCredentialsException;
+import net.kravuar.graphicalkey.domain.model.service.UserNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -32,14 +33,14 @@ public class ExceptionAdvice {
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(InvalidCredentialsException.class)
-    public String handleAuthException(InvalidCredentialsException exception) {
-        return exception.getMessage();
+    public LoginFailureDTO handleAuthException(InvalidCredentialsException exception) {
+        return new LoginFailureDTO(exception);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
-    public String handleAuthException(UserNotFoundException exception) {
-        return exception.getMessage();
+    public LoginFailureDTO handleAuthException(UserNotFoundException exception) {
+        return new LoginFailureDTO(exception);
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
