@@ -1,8 +1,11 @@
+variables:
+  &sessionTimeout 120s
+
 server:
   port: 8080
   servlet:
     session:
-      timeout: 60s
+      timeout: *sessionTimeout
 
 spring:
   application:
@@ -24,4 +27,5 @@ app:
       - RU
     defaultLocale: RU
   web:
-    login-attempts: 3
+    loginAttempts: 3
+    sessionTimeout: *sessionTimeout

@@ -1,8 +1,8 @@
 package net.kravuar.graphicalkey;
 
 import net.kravuar.graphicalkey.domain.dto.UserForm;
-import net.kravuar.graphicalkey.domain.model.*;
 import net.kravuar.graphicalkey.domain.model.FailureHandler;
+import net.kravuar.graphicalkey.domain.model.User;
 import net.kravuar.graphicalkey.domain.model.service.InvalidCredentialsException;
 import net.kravuar.graphicalkey.domain.model.service.LockoutException;
 import net.kravuar.graphicalkey.domain.model.service.UserNotFoundException;
@@ -17,9 +17,11 @@ import java.security.NoSuchAlgorithmException;
 public class AuthService {
     private final UserRepo userRepo;
     private final MessageDigest md;
+    private final AuthProps authProps;
 
-    public AuthService(UserRepo userRepo) throws NoSuchAlgorithmException {
+    public AuthService(UserRepo userRepo, AuthProps authProps) throws NoSuchAlgorithmException {
         this.userRepo = userRepo;
+        this.authProps = authProps;
         this.md = MessageDigest.getInstance("SHA-1");
     }
 
@@ -28,7 +30,7 @@ public class AuthService {
     }
     public String login(UserForm userForm, FailureHandler handler) {
         if (handler.getAttempts() <= 0)
-            throw new LockoutException();
+            throw new LockoutException(authProps.sessionTimeout()); // This works kind of dumb, but i can't find out how to prevent session from refreshing its timeout and use it here instead.
 
         var user = userRepo.findByUsername(userForm.username());
         if (user == null) {

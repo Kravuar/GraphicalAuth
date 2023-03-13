@@ -12,7 +12,7 @@ public class FailureHandler {
     private int attempts;
 
     public FailureHandler(AuthProps authProps) {
-        this.attempts = authProps.maxAttempts();
+        this.attempts = authProps.loginAttempts();
     }
     public void dec() {
         this.attempts++;
