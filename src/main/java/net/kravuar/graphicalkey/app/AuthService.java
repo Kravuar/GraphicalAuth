@@ -1,4 +1,4 @@
-package net.kravuar.graphicalkey;
+package net.kravuar.graphicalkey.app;
 
 import net.kravuar.graphicalkey.domain.dto.UserForm;
 import net.kravuar.graphicalkey.domain.model.FailureHandler;
@@ -6,6 +6,7 @@ import net.kravuar.graphicalkey.domain.model.User;
 import net.kravuar.graphicalkey.domain.model.service.InvalidCredentialsException;
 import net.kravuar.graphicalkey.domain.model.service.LockoutException;
 import net.kravuar.graphicalkey.domain.model.service.UserNotFoundException;
+import net.kravuar.graphicalkey.props.AuthProps;
 import org.bson.types.Binary;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class AuthService {
     }
     public String login(UserForm userForm, FailureHandler handler) {
         if (handler.getAttempts() <= 0)
-            throw new LockoutException(authProps.sessionTimeout()); // This works kind of dumb, but i can't find out how to prevent session from refreshing its timeout and use it here instead.
+            throw new LockoutException(authProps.sessionTimeout()); // This works kind of dumb, but I can't find out how to prevent session from refreshing its timeout and use it here instead.
 
         var user = userRepo.findByUsername(userForm.username());
         if (user == null) {
@@ -38,7 +39,7 @@ public class AuthService {
             throw new UserNotFoundException(userForm.username(), handler.getAttempts());
         }
 
-        if (user.getKeyHash().equals(toBinary(userForm.key()))) {
+        if (!user.getKeyHash().equals(toBinary(userForm.key()))) {
             handler.dec();
             throw new InvalidCredentialsException(userForm.username(), handler.getAttempts());
         }

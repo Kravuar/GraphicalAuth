@@ -1,4 +1,4 @@
-package net.kravuar.graphicalkey;
+package net.kravuar.graphicalkey.app;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -7,29 +7,28 @@ import net.kravuar.graphicalkey.domain.dto.UserForm;
 import net.kravuar.graphicalkey.domain.model.FailureHandler;
 import net.kravuar.graphicalkey.domain.model.User;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/users")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private final AuthService authService;
+    private final FailureHandler handler;
 
     @PostMapping("signup")
-    public User signup(@Valid UserForm userForm) {
+    public User signup(@RequestBody @Valid UserForm userForm) {
         var user = authService.signup(userForm);
         log.info("SIGNUP: {}", user);
         return user;
     }
 
     @PostMapping("login")
-    public String login(@Valid UserForm userForm, FailureHandler handler) {
+    public String login(@RequestBody @Valid UserForm userForm) {
         log.info("LOGIN ATTEMPT: {}", userForm.username());
         return authService.login(userForm, handler);
     }
 }
-

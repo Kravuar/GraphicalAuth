@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserNotFoundException extends RestException {
@@ -17,8 +18,8 @@ public class UserNotFoundException extends RestException {
 
     @Override
     public List<Pair<String, Object[]>> getMessages() {
-        var messages = super.getMessages();
-        messages.add(Pair.of("exception.userNotFound", new Object[]{username}));
+        var messages = new ArrayList<>(super.getMessages());
+        messages.add(0, Pair.of("exception.userNotFound", new Object[]{username}));
         return messages;
     }
 

@@ -1,4 +1,4 @@
-package net.kravuar.graphicalkey;
+package net.kravuar.graphicalkey.props;
 
 import jakarta.validation.constraints.Min;
 import org.springframework.boot.context.properties.ConfigurationProperties;

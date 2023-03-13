@@ -1,6 +1,5 @@
 package net.kravuar.graphicalkey.domain.model;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.bson.types.Binary;
@@ -17,9 +16,8 @@ public class User {
     @Id
     private ObjectId id;
     @Indexed(unique = true)
-    @Size(min = 5, max = 20, message = "validation.username")
+    @Size(min = 5, max = 20)
     private String username;
-    @NotBlank(message = "validation.keyHash")
     private Binary keyHash;
 
     public User(String username, Binary keyHash) {
