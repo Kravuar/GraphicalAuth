@@ -6,6 +6,7 @@ import {useAlert} from "react-alert";
 
 const axiosConfigured = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
+    withCredentials: true,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -30,7 +31,7 @@ export default function App() {
               username: username,
               key: getKey()
           }))
-          .then((resp) => alert.success(`Successfully logged in as ${username}. Token ${resp.data}`))
+          .then((resp) => alert.success(`Successfully logged in as ${username}. Token: ${resp.data}`))
           .catch((error) => alert.error(parseError(error)));
   }
 

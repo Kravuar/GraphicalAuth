@@ -5,10 +5,12 @@ import net.kravuar.graphicalkey.props.AuthProps;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.io.Serializable;
+
 @Component
 @SessionScope
 @Getter
-public class FailureHandler {
+public class FailureHandler implements Serializable {
     private int attempts;
 
     public FailureHandler(AuthProps authProps) {

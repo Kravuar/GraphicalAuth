@@ -30,7 +30,7 @@ public class AuthService {
         return userRepo.insert(new User(userForm.username(), toBinary(userForm.key())));
     }
     public String login(UserForm userForm, FailureHandler handler) {
-        if (handler.getAttempts() <= 0)
+        if (handler.getAttempts() <= 1)
             throw new LockoutException(authProps.sessionTimeout()); // This works kind of dumb, but I can't find out how to prevent session from refreshing its timeout and use it here instead.
 
         var user = userRepo.findByUsername(userForm.username());
